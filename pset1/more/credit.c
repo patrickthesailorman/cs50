@@ -24,7 +24,8 @@ int main(void)
             {
                 nums = k + j; // Add numbers to each other
 
-            }
+            } // Add numbers to numbers that did not get multiplied
+              // if sum %10 == 0 then "Valid"
         }
     }
     printf(cc, nums, nums2);
