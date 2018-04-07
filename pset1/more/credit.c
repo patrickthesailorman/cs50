@@ -20,9 +20,10 @@ int main(void)
         nums = i * 2; // Multiply by 2
         for ( int j = 0; j < nums; j++ )
         {
-            for ( int k =0; k < nums2; k++ )
+            for ( int k =0; k < nums2; k++ ) // split double digit numbers
             {
-                nums = k + j;
+                nums = k + j; // Add numbers to each other
+
             }
         }
     }
