@@ -40,3 +40,12 @@ int main(void)
     }
     printf("Total coins:%i\n", coins); // return total number of coins used to make change
 }
+
+//////////////////////////////////////////////////////////////////////
+// PR Manny
+// Code is indented well, everything flows and is easy to follow
+// Im sure there exist a faster way to iterate through this code,
+// but I have no idea what that way is yet.
+// Every WHILE statement is minimal and procise.
+// You have good names/sytax for your variables and just makes the
+// code concise.
