@@ -15,3 +15,11 @@ int main(void)
 
     printf("Your %i minute shower, uses %i bottles of water\n", n, x);
 }
+
+////////////////////////////////////////////////////////////////////////
+// PR MP
+// I like how minimal the code is and also it gets the job done.
+// You also went out of your way to add some personal touches to the assignment.
+// The comments are straight forward and understandable.
+// One advice I would give is to assign your variables more descriptive names/identifiers,
+// which in turn would help make your code even easier to follow.
