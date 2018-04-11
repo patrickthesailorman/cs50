@@ -6,22 +6,31 @@
 
 int main (void)
 {
- do
- {
-    printf ("Enter Name:\n"); // Get User input
-     string name = get_string("Name: ");
- }
-    while (name != NULL);
+    // int n;
+    string name;
+    do
+    {
+     name = get_string("Name: "); // Get User input
+    }
+    while (name == NULL);
 
      // Iterate over chars of string
-     for (int i = 0; n < strlen(name), i < n; i ++)
+     for (int i = 0; i < strlen(name); i ++)
      {
-      int n = 0;
-       while (name[n] = ' ')
+
+      while (name[i] == (0))
        {
-        n++;
+           printf(name[0].toupper)
        }
 
-        printf("%c%c%c\n", toupper(name[0]), toupper(name[' '' + 1]), toupper(name [' ' + 1]));
+      while (name[i] == (' '))
+      {
+          printf(name[i] == (' ').toupper)
+      }
+    //   {
+    //     n++;
+    //   }
+
+        // printf("%c%c%c\n", toupper(name[0]), toupper((name[i] == ' ') + 1), toupper((name [i] == ' ') + 1));
      }
 }
