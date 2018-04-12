@@ -17,9 +17,9 @@ int main (void)
      // Iterate over chars of string
      for (int i = 0, n = strlen(name); i < n; i ++)
      {
-        if (name[i] == name[0] && name[i] >= 'a' && name[i] <= 'z')
+        if (name[i] == name[0])
         {
-            printf("%c", name[i] - ('a' -'A'));
+            printf("%c", toupper(name[i]));
         }
         else
         if (name[i] == ' ')
