@@ -21,9 +21,11 @@ int main (void)
         {
             printf("%c", name[i] - ('a' -'A'));
         }
-        else if (name[i] == ' ')
+        else
+        if (name[i] == ' ')
         {
-            printf("%c", name[i]  + 1.toupper);
+            i ++;
+            printf("%c", toupper(name[i]));
         }
      }
      printf("\n");
@@ -42,6 +44,6 @@ int main (void)
 //     //     n++;
 //     //   }
 
-//         // printf("%c%c%c\n", toupper(name[0]), toupper((name[i] == ' ') + 1), toupper((name [i] == ' ') + 1));
+//         // printf("%c%c%c\n", toupper(name[0]), toupper((name[i] == ' ') + 1), toupper((name[i] == ' ') + 1));
 //      }
 // }
