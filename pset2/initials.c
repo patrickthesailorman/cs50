@@ -30,20 +30,3 @@ int main (void)
      }
      printf("\n");
 }
-
-//       while (name[i] == (0))
-//       {
-//           printf(name[0].toupper)
-//       }
-
-//       while (name[i] == (' '))
-//       {
-//           printf(name[i] == (' ').toupper)
-//       }
-//     //   {
-//     //     n++;
-//     //   }
-
-//         // printf("%c%c%c\n", toupper(name[0]), toupper((name[i] == ' ') + 1), toupper((name[i] == ' ') + 1));
-//      }
-// }
