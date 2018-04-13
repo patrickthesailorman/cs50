@@ -13,3 +13,6 @@ int main(int argc, string argv[])
     {
         printf()
     }
+
+        int k = argv;
+}
