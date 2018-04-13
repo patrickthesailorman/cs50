@@ -9,3 +9,7 @@ int main(int argc, string argv[])
         printf("error")
         return 1;
     }
+    else
+    {
+        printf()
+    }
