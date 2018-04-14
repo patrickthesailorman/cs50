@@ -15,9 +15,10 @@ int main(int argc, string argv[])
        int k = atoi(argv[1]);
        printf("enter passphrase: \n");
        string pp = get_string();
-       for ( char i = 0; i < strlen(argv[1]); i++ )
+       for ( char i = 0; i < strlen(pp); i++ )
+       if (i == 'A'-'Z' || i == 'a'-'z')
         string ec = i - k;
-        printf("%s",pp);
+        printf("%s",ec);
     }
 
 
