@@ -17,8 +17,10 @@ int main(int argc, string argv[])
        string pp = get_string();
        for ( char i = 0; i < strlen(pp); i++ )
        if (i == 'A'-'Z' || i == 'a'-'z')
-        string ec = i - k;
-        printf("%s",ec);
+       {
+        int ec = (pp[i] + k) % 26;
+        printf("%c",ec);
+       }
     }
 
 
