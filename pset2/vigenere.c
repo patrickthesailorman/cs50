@@ -8,7 +8,7 @@
 
 int main(int argc, string argv[])
 {
-    char ct;
+    // char ct;
     if (argc == 0 || argc < 2) // requires at least one argument to be the alphabetical key to cipher
     {
         printf("error");
@@ -21,47 +21,49 @@ int main(int argc, string argv[])
     printf("ciphertext: "); // Print ciphertext here
     int klen = strlen(argv[1]); // Set key length to integer
 
-        for (int j = 0, m = k; j < m; j++) // Iterate over key
+        for (int i = 0, j =strlen(pt), kw = 0; i < j; i++) // Iterate though (i = count. j = strlength kw = keyword)
         {
-            if (isalpha(j)) // check if character is alphabetic
+            if (isalpha(pt[i])) // check if character is alphabetic
                 {
-                    if (isupper(j)) // preserve case of character
+                    if (isupper(pt[i])) // preserve case of character
                     {
-                        j = j - (int)'A'; // to ascii to alphabetic index
+                        printf("%c", ((pt[i] - 'A' + k[kw%klen]) % 26) + 'A'); // ABC index, shift by key but wraparound, return to ASCII
+                        kw++;
                     }
-                    else if (islower(j))
+                    else if (islower(pt[i]))
                     {
-                        j = j - (int)'a';
+                        printf("%c", ((pt[i] - 'a' + k[kw%klen]) % 26) + 'a'); // ABC index, shift by key but wraparound, return to ASCII
+                        kw++;
                     }
                 }
                 else  // includes special characters
                 {
-                    j++;
+                    printf("%c", pt[i]);
                 }
 
 
-                for (int i = 0, n = strlen(pt); i < n; i++) // iterate through the string
-                    if (isalpha(pt[i])) // check if character is alphabetic
-                    {
-                        if (isupper(pt[i])) // preserve case of character
-                        {
-                        ct = (pt[i] - 'A' + k[j]) % 26 + 'A'; // to ascii to alphabetic index
-                        printf("%c", ct);
-                        }
-                        else if (islower(pt[i]))
-                        {
-                        ct = (pt[i] - 'a' + k[j]) % 26 + 'a';
-                        printf("%c", ct);
-                        }
+                // for (int i = 0, n = strlen(pt); i < n; i++) // iterate through the string
+                //     if (isalpha(pt[i])) // check if character is alphabetic
+                //     {
+                //         if (isupper(pt[i])) // preserve case of character
+                //         {
+                //         ct = (pt[i] - 'A' + k[j]) % 26 + 'A'; // to ascii to alphabetic index
+                //         printf("%c", ct);
+                //         }
+                //         else if (islower(pt[i]))
+                //         {
+                //         ct = (pt[i] - 'a' + k[j]) % 26 + 'a';
+                //         printf("%c", ct);
+                //         }
 
-                    }
-                    else if (!isalpha(pt[i])) // includes special characters
-                    {
-                    ct = pt[i];
-                    printf("%c", ct);
-                    }
+                //     }
+                //     else if (!isalpha(pt[i])) // includes special characters
+                //     {
+                //     ct = pt[i];
+                //     printf("%c", ct);
+                //     }
 
         }
         printf("\n");
-
+}
 }
