@@ -19,32 +19,35 @@ int main(int argc, string argv[])
         printf("plaintext: ");
         string pt = get_string(); // prompts user for string to encrypt
         printf("ciphertext: ");
-        int k = atoi(argv[1]); // set key from string to integer
-        for (int j = 0, m = strlen(k); j < m; j++) // Iterate over key
+        char k = strlen(argv[1]); // set key from string to integer
+        if (isalpha(k))
         {
+            for (int j = 0, m = strlen(k); j < m; j++) // Iterate over key
+            {
 
-            for (int i = 0, n = strlen(pt); i < n; i++) // iterate through the string
-                if (isalpha(pt[i])) // check if character is alphabetic
-                {
-                    if (isupper(pt[i])) // preserve case of character
+                for (int i = 0, n = strlen(pt); i < n; i++) // iterate through the string
+                    if (isalpha(pt[i])) // check if character is alphabetic
                     {
-                        ct = (pt[i] - 'A' + k[j]) % 26 + 'A'; // to ascii to alphabetic index
+                        if (isupper(pt[i])) // preserve case of character
+                        {
+                            ct = (pt[i] - 'A' + k[j]) % 26 + 'A'; // to ascii to alphabetic index
+                            printf("%c", ct);
+                        }
+                        else if (islower(pt[i]))
+                        {
+                            ct = (pt[i] - 'a' + k[j]) % 26 + 'a';
+                            printf("%c", ct);
+                        }
+
+                    }
+                    else if (!isalpha(pt[i])) // includes special characters
+                    {
+                        ct = pt[i];
                         printf("%c", ct);
                     }
-                    else if (islower(pt[i]))
-                    {
-                        ct = (pt[i] - 'a' + k[j]) % 26 + 'a';
-                        printf("%c", ct);
-                    }
 
-                }
-                else if (!isalpha(pt[i])) // includes special characters
-                {
-                    ct = pt[i];
-                    printf("%c", ct);
-                }
-
+            }
+            printf("\n");
         }
-        printf("\n");
     }
 }
