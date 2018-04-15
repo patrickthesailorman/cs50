@@ -8,7 +8,7 @@
 
 int main(int argc, string argv[])
 {
-      char ct;
+    char ct;
     if (argc == 0 || argc < 2) // requires at least one argument to be the alphabetical key to cipher
     {
         printf("error");
@@ -16,29 +16,28 @@ int main(int argc, string argv[])
     }
     else
     {
-        printf("plaintext: ");
-        string pt = get_string(); // prompts user for string to encrypt
-        printf("ciphertext: ");
-        int k = strlen(argv[1]); // set key from string to integer
-        for (int j = 0, m = strlen(k); j < m; j++) // Iterate over key
-            if (isalpha(k[j])) // check if character is alphabetic
+    int k = strlen(argv[1]); // set key from string to integer
+        for (int j = 0, m = k; j < m; j++) // Iterate over key
+            if (isalpha(j)) // check if character is alphabetic
                 {
-                    if (isupper(k[j])) // preserve case of character
+                    if (isupper(j)) // preserve case of character
                     {
-                        k[j] = k[j] - (int)'A'; // to ascii to alphabetic index
+                        j = j - (int)'A'; // to ascii to alphabetic index
 
                     }
-                    else if (islower(pt[i]))
+                    else if (islower(j))
                     {
-                        k[j] = k[j] - (int)'a';
+                        j = j - (int)'a';
                     }
 
                 }
                 else  // includes special characters
                 {
-                    k[j] = k[j];
+                    j++;
                 }
-
+        printf("plaintext: ");
+        string pt = get_string(); // prompts user for string to encrypt
+        printf("ciphertext: ");
             for (int i = 0, n = strlen(pt); i < n; i++) // iterate through the string
                 if (isalpha(pt[i])) // check if character is alphabetic
                 {
