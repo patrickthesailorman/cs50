@@ -6,10 +6,6 @@
 
 // vigenere encryption
 
-int key_check();
-int klen;
-
-
 int main(int argc, string argv[])
 {
     if (argc == 0 || argc < 2 || argc > 2) // requires at least one argument to be the alphabetical key to cipher
@@ -17,15 +13,26 @@ int main(int argc, string argv[])
         printf("error");
         return 1;
     }
-    // else if (!strcheck(k) )
+    // else if (argv[1])
     // {
-    //   printf("Usage : ./vigenere k\n");
-    //   return 1;
+    //     for (int i = 0, j = strlen(key), k = 0; i < j; i++)
+    //     {
+    //     if (!isalpha(key[k]))
+    //     {
+    //         printf("Usage : ./vigenere k\n");
+    //         return 1;
+    //         break;
+    //     }
+    //     else // if the char is not abc, return error
+    //     {
+    //         k++;
+    //     }
+    //     return 0;
     // }
-    else
+    else // if (isalpha(argv[1]))
     {
         string k = argv[1]; // Set key
-        klen = strlen(argv[1]); // Set key length to integer
+        int klen = strlen(argv[1]); // Set key length to integer
         string pt = get_string("plaintext: "); // Prompts user for string to encrypt
         printf("ciphertext: "); // Print ciphertext here
 
@@ -51,22 +58,4 @@ int main(int argc, string argv[])
         }
         printf("\n");
     }
-}
-
-
-int key_check(k) // function to verify key is all ABC chars
-{
-    for (int i = 0, j = klen; i < j; i++)
-    {
-        if (isalpha(k[i]))
-        {
-            i++;
-        }
-        else // if the char is not abc, return error
-        {
-            return 1;
-            break;
-        }
-    }
-    return 0;
 }
