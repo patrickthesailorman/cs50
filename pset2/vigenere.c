@@ -8,7 +8,6 @@
 
 int main(int argc, string argv[])
 {
-    // char ct;
     if (argc == 0 || argc < 2 || argc > 2) // requires at least one argument to be the alphabetical key to cipher
     {
         printf("error");
