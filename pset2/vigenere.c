@@ -59,3 +59,20 @@ int main(int argc, string argv[])
         printf("\n");
     }
 }
+
+// good use of space and comments
+// logic is clear to follow
+// line 16-30: if you have code commented out, don't forget to remove it
+
+// so I think I found your bug. check out below.
+// you should get n... and it looks like you get it... when z is lowercase
+// ~/workspace/par/cs50/pset2/ (pr-cat) $ ./vigenere  Z
+// plaintext: o
+// ciphertext: h
+// ~/workspace/par/cs50/pset2/ (pr-cat) $ ./vigenere  z
+// plaintext: o
+// ciphertext: n
+// your logic only takes care of the case, for your cipher text... but not your key.
+// if you take care of that (try to match the case of the letter you are encrypting
+//this should fix yr issue)
+

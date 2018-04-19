@@ -30,3 +30,8 @@ int main(void)
     }
     printf("\n");
 }
+
+// good use of space and comments
+// logic is clear to follow
+// line 9: if you have code commented out, dont forget to remove it
+

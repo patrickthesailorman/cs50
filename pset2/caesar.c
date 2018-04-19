@@ -44,3 +44,12 @@ int main(int argc, string argv[])
     }
     printf("\n");
 }
+
+// good use of space and comments
+// logic is clear to follow
+// suggestions
+// ct -> ciph_text
+// pt -> prompt_text
+
+// reason: it makes code easier to understand, usually
+// one or two letter vars are saved for iterators
