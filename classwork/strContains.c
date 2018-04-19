@@ -7,19 +7,22 @@ string strContains();
 
 int main(int argc, string argv[])
 {
-    string str1 = get_string("Enter a string:\n");
-    string subStr = get_string("Enter string to find:\n");
-    strContains(str1,subStr);
-        {
-      if (argc > 3)
+    if (argc > 3)
       {
           printf("error!");
 
       }
       else if (argc == 3 )
       {
-        str1 = argv[1];
-        subStr = argv[2];
+        string str1 = get_string("Enter a string:\n");
+        string subStr = get_string("Enter string to find:\n");
+        strContains(argv[1], argv[2]);
+      }
+}
+    string strContains(string str1, substr);
+    {
+        str1 = str1;
+        subStr = subStr;
         char * strstr(const char * str1, const char * substr);
         if (true)
         {
@@ -34,6 +37,6 @@ int main(int argc, string argv[])
 
       }
     }
-}
+
 
 
