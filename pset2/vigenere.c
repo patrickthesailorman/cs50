@@ -6,30 +6,37 @@
 
 // vigenere encryption
 
+int kw_check(string input)
+    {
+        int i = 0;
+        while (input[i])
+        {
+        if (!isalpha(input[i]))
+        {
+            // return false if non-alpha character
+            // found
+            return 0;
+        }
+
+        ++i;
+        }
+        // return true if only letters
+        return 1;
+    }
+
 int main(int argc, string argv[])
 {
     if (argc != 2)
     {
         printf("usage:");
-        printf("./vigenere %s\n", argv[1]);
+        printf("./vigenere k");
         return 1;
     }
-    // else if (argv[1])
-    // {
-    //     for (int i = 0, j = strlen(key), k = 0; i < j; i++)
-    //     {
-    //     if (!isalpha(key[k]))
-    //     {
-    //         printf("Usage : ./vigenere k\n");
-    //         return 1;
-    //         break;
-    //     }
-    //     else // if the char is not abc, return error
-    //     {
-    //         k++;
-    //     }
-    //     return 0;
-    // }
+    else if (!kw_check(argv[1]))
+    {
+        return 1;
+    }
+
     else // if (isalpha(argv[1]))
     {
         string k = argv[1]; // Set key
