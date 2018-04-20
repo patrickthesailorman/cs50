@@ -8,9 +8,10 @@
 
 int main(int argc, string argv[])
 {
-    if (argc == 0 || argc < 2 || argc > 2) // requires at least one argument to be the alphabetical key to cipher
+    if (argc != 2)
     {
-        printf("error");
+        printf("usage:");
+        printf("./vigenere %s\n", argv[1]);
         return 1;
     }
     // else if (argv[1])
