@@ -44,8 +44,6 @@ int main(int argc, string argv[])
         string pt = get_string("plaintext: "); // Prompts user for string to encrypt
         printf("ciphertext: "); // Print ciphertext here
 
-    k = toupper(k);
-
         for (int i = 0, j = strlen(pt), kw = 0; i < j; i++) // Iterate though (i = count. j = strlength kw = keyword)
         {
             if (isalpha(pt[i])) // check if character is alphabetic
