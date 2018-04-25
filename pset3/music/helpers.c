@@ -1,6 +1,7 @@
 // Helper functions for music
 
 #include <cs50.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "helpers.h"
@@ -8,28 +9,26 @@
 // Converts a fraction formatted as X/Y to eighths
 int duration(string fraction)
 {
-    int notelen = atoi(fraction)
+    for (int i = 0, j = strlen(fraction); i < j; i++)
     {
-           switch(notelen) {
-      case '1/8' :
-         printf("%i", 1);
+    int numerator = atoi(fraction[0]);
+    int denominator = atoi(fraction[2]);
+
+    switch(denominator)
+    {
+      case 8 : // '1/8'
+         return numerator;
          break;
-      case '1/4' :
-         printf("%i", 2);
+      case 4 : // '1/4'
+         return numerator * 2;
          break;
-      case '3/8' :
-         printf("%i", 3);
+      case 2 : // '1/2'
+         return numerator * 4;
          break;
-      case '1/2' :
-         printf("%i", 4);
-         break;
+
       default :
-         printf("Invalid duration\n" );
-   }
-
-   printf("note length is  %i\n", notelen );
-
-   return 0;
+         return 0;
+    }
     }
 }
 
@@ -42,7 +41,8 @@ int frequency(string note)
 // Determines whether a string represents a rest
 bool is_rest(string s)
 {
-    int rest_compare = strcmp(s, "")
+    int rest_compare = strcmp(s, "");
+
     if (rest_compare == 0)
     {
     return true;
