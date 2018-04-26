@@ -35,7 +35,27 @@ int duration(string fraction)
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
-    // TODO
+    if (strlen(note) == 3)
+    {
+        int key = note[0];
+        char accidental = note[1];
+        int octave =note[2];
+    }
+    else
+    {
+
+        key = note[0];
+        octave = note[1];
+    }
+    switch(note)
+    {
+        case 'A4':
+          return 440;
+          break;
+        case 'A5':
+          return math.round(440 * 2);
+          break;
+    }
 }
 
 // Determines whether a string represents a rest
