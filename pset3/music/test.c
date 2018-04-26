@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    bool is_rest(string s)
+    string s = get_string("string s");
     {
         int rest_compare = strcmp(s, "");
         if (rest_compare == 0)
