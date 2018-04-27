@@ -11,19 +11,19 @@ int duration(string fraction)
 {
     for (int i = 0, j = strlen(fraction); i < j; i++)
     {
-    int numerator = atoi(fraction[0]);
-    int denominator = atoi(fraction[2]);
+    int numerator = fraction[0];
+    int denominator = fraction[2];
 
     switch(denominator)
     {
-      case 8 : // '1/8'
-         return numerator;
+      case 56 : // '1/8'
+         return numerator - '0';
          break;
-      case 4 : // '1/4'
-         return numerator * 2;
+      case 52 : // '1/4'
+         return (numerator - '0') * 2;
          break;
-      case 2 : // '1/2'
-         return numerator * 4;
+      case 50 : // '1/2'
+         return (numerator - '0') * 4;
          break;
 
       default :
