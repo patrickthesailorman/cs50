@@ -40,12 +40,12 @@ int main(void)
             case 'A':
             if (note[1] == '#' )
             {
-              return 440;
+              return 440 * pow(2.0, (1.0 / 12.0));
             }
-            return 440 * pow(2.0, (1.0 / 12.0));
+            return 440;
               break;
             case 'B':
-              // return math.round(440 * 2);
+              return 440 * pow(2.0, (2.0 / 12.0));
               break;
         }
         }
