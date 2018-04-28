@@ -7,30 +7,55 @@
 
 int main(void)
 {
-   string fraction = get_string("fraction\n");
-
-    for (int i = 0, j = strlen(fraction); i < j; i++)
+    string note = get_string("note\n");
     {
-    int numerator = fraction[0];
-    int denominator = fraction[2];
+        if (strlen(note) == 3)
+        {
+            char key = note[0];
+            char accidental = note[1];
+            int octave =note[2];
 
-    switch(denominator)
-    {
-      case 56 : // '1/8'
-         return numerator - '0';
-         break;
-      case 52 : // '1/4'
-         printf("%i\n", (numerator - '0') * 2);
-         return (numerator - '0') * 2;
-         break;
-      case 50 : // '1/2'
-        printf("%i\n", (numerator - '0') * 4);
-         return (numerator - '0') * 4;
-         break;
+        switch(note[0])
+        {
+            case 'C':
+            return 440 / pow(2.0, (9.0 / 12.0));
+            break;
 
-      default :
-         return 0;
-    }
+            case 'D':
+            return 440 / pow(2.0, (7.0 / 12.0));
+            break;
+
+            case 'E':
+            return 440 / pow(2.0, (5.0 / 12.0));
+            break;
+
+            case 'F':
+            return 440 / pow(2.0, (4.0 / 12.0));
+            break;
+
+            case 'G':
+            return 440 / pow(2.0, (2.0 / 12.0));
+            break;
+
+            case 'A':
+            if (note[1] == '#' )
+            {
+              return 440;
+            }
+            return 440 * pow(2.0, (1.0 / 12.0));
+              break;
+            case 'B':
+              // return math.round(440 * 2);
+              break;
+        }
+        }
+        else
+        {
+
+            key = note[0];
+            octave = note[1];
+        }
+
     }
 
 }

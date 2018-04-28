@@ -47,10 +47,13 @@ int frequency(string note)
         key = note[0];
         octave = note[1];
     }
-    switch(note)
+    switch(note[0])
     {
-        case 'A4':
+        case 'A':
+        if (note[1] == '#' && note[2] == 4)
+        {
           return 440;
+        }
           break;
         case 'A5':
           return math.round(440 * 2);
