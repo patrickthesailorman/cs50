@@ -33,7 +33,7 @@ int duration(string fraction)
         }
         return eighths;
     }
-    return 20;
+    return 20; // return some value
 }
 
 // Calculates frequency (in Hz) of a note
