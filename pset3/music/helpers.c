@@ -140,3 +140,12 @@ bool is_rest(string s)
         return false;
     }
 }
+
+/////////////////////////////////////////////////////////
+// Good use of your naming conventions, it helps make
+// your code easy to read and follow along.
+// I like your use of the Switch statement and I
+// see that you were able to use it twice in one
+// function. I was afraid to try it but now I may
+// steal your idea. Overall your code seems pretty
+// minimal and well ordered.
