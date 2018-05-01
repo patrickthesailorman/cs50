@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     // ensure proper usage
     if (argc != 3)
     {
-        fprintf(stderr, "Usage: copy infile outfile\n");
+        fprintf(stderr, "Usage: ./whodunit infile outfile\n");
         return 1;
     }
 
@@ -75,6 +75,21 @@ int main(int argc, char *argv[])
 
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+            if (triple.rgbtRed == 0xff && triple.rgbtBlue == 0xff && triple.rgbtGreen == 0xff)
+            {
+                triple.rgbtRed = 0x11;
+                triple.rgbtBlue = 0x80;
+                triple.rgbtGreen = 0x80;
+            }
+            // else if (triple.rgbtBlue == 0xff)
+            // {
+            //     triple.rgbtBlue = 0x80;
+            // }
+            // else if (triple.rgbtGreen == 0xff)
+            // {
+            //     triple.rgbtGreen = 0x80;
+            // }
 
             // write RGB triple to outfile
             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
