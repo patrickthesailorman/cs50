@@ -82,14 +82,6 @@ int main(int argc, char *argv[])
                 triple.rgbtBlue = 0x80;
                 triple.rgbtGreen = 0x80;
             }
-            // else if (triple.rgbtBlue == 0xff)
-            // {
-            //     triple.rgbtBlue = 0x80;
-            // }
-            // else if (triple.rgbtGreen == 0xff)
-            // {
-            //     triple.rgbtGreen = 0x80;
-            // }
 
             // write RGB triple to outfile
             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
