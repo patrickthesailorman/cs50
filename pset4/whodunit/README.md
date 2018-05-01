@@ -50,8 +50,8 @@ nmemb − This is the number of elements, each one with a size of size bytes.
 
 ## What does `fseek` do?
 
-skip over `padding`, if any
+skips over `padding`, if any
 
 ## What is `SEEK_CUR`?
 
-TODO
+`SEEK_CUR` = Current position of the file pointer
