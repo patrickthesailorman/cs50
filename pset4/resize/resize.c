@@ -13,6 +13,11 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Usage: ./resize 4 small.bmp large.bmp\n");
         return 1;
     }
+    else if (argv[1] !<= 100)
+    {
+        fprintf(stderr, "Use positive number less than or equal to 100\n");
+        return 1;
+    }
 
     // resize factor
     int num = argv[1];
