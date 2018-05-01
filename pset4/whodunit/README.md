@@ -50,7 +50,7 @@ nmemb − This is the number of elements, each one with a size of size bytes.
 
 ## What does `fseek` do?
 
-TODO
+skip over `padding`, if any
 
 ## What is `SEEK_CUR`?
 
