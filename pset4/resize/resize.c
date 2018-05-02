@@ -7,20 +7,22 @@
 
 int main(int argc, char *argv[])
 {
+    //  change resize factor to int
+    int num = atoi(argv[1]);
+
     // ensure proper usage
     if (argc != 4)
     {
         fprintf(stderr, "Usage: ./resize 4 small.bmp large.bmp\n");
         return 1;
     }
-    else if (argv[1] !<= 100)
+    else if (num < 0 || num > 100)
     {
         fprintf(stderr, "Use positive number less than or equal to 100\n");
         return 1;
     }
 
-    // resize factor
-    int num = argv[1];
+
     // remember filenames
     char *infile = argv[2];
     char *outfile = argv[3];
@@ -72,11 +74,11 @@ int main(int argc, char *argv[])
     // iterate over infile's scanlines
     for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
     {
-        i * num;
+
         // iterate over pixels in scanline
         for (int j = 0; j < bi.biWidth; j++)
         {
-            j * num;
+
             // temporary storage
             RGBTRIPLE triple;
 
