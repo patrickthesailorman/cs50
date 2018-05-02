@@ -64,6 +64,11 @@ int main(int argc, char *argv[])
 
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
+    if (bf.biWidth || bf.biHeight)
+    {
+        bf.biWidth *= num;
+        bf.biHeight *= num;
+    }
 
     // write outfile's BITMAPINFOHEADER
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
