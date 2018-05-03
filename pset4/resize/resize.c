@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
         if (bf.bfSize)
         {
-            bf.bfSize *= num;
+            bf.bfSize *= (num * num);
         }
 
 
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
         {
             bi.biWidth *= num;
             bi.biHeight *= num;
-            bi.biSizeImage *= num;
+            bi.biSizeImage *= (num * num);
         }
 
     // determine padding for scanlines
