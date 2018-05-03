@@ -27,6 +27,11 @@ int main(int argc, char *argv[])
     char *infile = argv[2];
     char *outfile = argv[3];
 
+    // Variables for original specs
+    long OGwidth = bi.biWidth;
+    long OGheight = bi.biHeight;
+    int  OGpadding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+
     // open input file
     FILE *inptr = fopen(infile, "r");
     if (inptr == NULL)
