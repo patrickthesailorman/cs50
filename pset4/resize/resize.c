@@ -27,11 +27,6 @@ int main(int argc, char *argv[])
     char *infile = argv[2];
     char *outfile = argv[3];
 
-    // Variables for original specs
-    long OGwidth = bi.biWidth;
-    long OGheight = bi.biHeight;
-    int  OGpadding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-
     // open input file
     FILE *inptr = fopen(infile, "r");
     if (inptr == NULL)
@@ -57,6 +52,11 @@ int main(int argc, char *argv[])
     BITMAPINFOHEADER bi;
     fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
 
+    // Variables for original specs
+    // long OGwidth = bi.biWidth;
+    // long OGheight = bi.biHeight;
+    // int  OGpadding = (4 - (OGwidth * sizeof(RGBTRIPLE)) % 4) % 4;
+
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
     if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
         bi.biBitCount != 24 || bi.biCompression != 0)
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
         {
             bf.bfSize *= (num * num);
         }
-
+        // bf.bfSize = bi.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
         printf("%u\n", bf.bfSize);
 
     // write outfile's BITMAPINFOHEADER
@@ -93,11 +93,9 @@ int main(int argc, char *argv[])
     // iterate over infile's scanlines
     for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
     {
-
         // iterate over pixels in scanline
         for (int j = 0; j < bi.biWidth; j++)
         {
-
             // temporary storage
             RGBTRIPLE triple;
 
