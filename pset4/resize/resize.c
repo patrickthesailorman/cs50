@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     //  change resize factor to int
-    int num = atoi(argv[1]);
+    int n = atoi(argv[1]);
 
     // ensure proper usage
     if (argc != 4)
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Usage: ./resize 4 small.bmp large.bmp\n");
         return 1;
     }
-    else if (num < 0 || num > 100)
+    else if (n < 0 || n > 100)
     {
         fprintf(stderr, "Use positive number less than or equal to 100\n");
         return 1;
@@ -53,8 +53,8 @@ int main(int argc, char *argv[])
     fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
 
     // Variables for original specs
-    long OGwidth = bi.biWidth;
-    long OGheight = bi.biHeight;
+    int OGwidth = bi.biWidth;
+    int OGheight = bi.biHeight;
     int  OGpadding = (4 - (OGwidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
@@ -67,37 +67,30 @@ int main(int argc, char *argv[])
         return 4;
     }
 
-    // write outfile's BITMAPFILEHEADER
-    fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
-        if (bf.bfSize)
-        {
-            bf.bfSize *= (num * num);
-        }
-        // bf.bfSize = bi.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-        printf("%u\n", bf.bfSize);
-
-    // write outfile's BITMAPINFOHEADER
-    fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
-        if (bi.biWidth || bi.biHeight || bi.biSizeImage)
-        {
-            OGwidth *= num;
-            OGheight *= -num;
-            bi.biSizeImage *= (num * num);
-        }
-        printf("%u\n", bi.biWidth);
-        printf("%u\n", bi.biHeight);
-        printf("%u\n", bi.biSizeImage);
     // determine padding for scanlines
     // int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
-    // for num times...
-    for (int h = 0; h < num; h++)
-    {
+    // before writing to outptr- MODIFY THE HEADERS
+    bi.biWidth *= n;
+    bi.biHeight *= n;
+
+    int newPadding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+
+    bi.biSizeImage = ((sizeof(RGBTRIPLE) * bi.biWidth) + newPadding) * abs(bi.biHeight);
+    bf.bfSize = bi.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+
+
+    // write outfile's BITMAPFILEHEADER
+    fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
+
+    // write outfile's BITMAPINFOHEADER
+    fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
+
         // iterate over infile's scanlines
-        for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+        for (int i = 0, biHeight = abs(OGheight); i < biHeight; i++)
         {
             // iterate over pixels in scanline
-            for (int j = 0; j < bi.biWidth; j++)
+            for (int j = 0; j < OGwidth; j++)
             {
                 // temporary storage
                 RGBTRIPLE triple;
@@ -117,12 +110,12 @@ int main(int argc, char *argv[])
             fseek(inptr, OGpadding, SEEK_CUR);
 
             // then add it back (to demonstrate how)
-            for (int k = 0; k < OGpadding; k++)
+            for (int k = 0; k < newPadding; k++)
             {
                 fputc(0x00, outptr);
             }
         }
-    }
+    // }
     // close infile
     fclose(inptr);
 
