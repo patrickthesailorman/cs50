@@ -89,30 +89,42 @@ int main(int argc, char *argv[])
         // iterate over infile's scanlines
         for (int i = 0, biHeight = abs(OGheight); i < biHeight; i++)
         {
-            // iterate over pixels in scanline
-            for (int j = 0; j < OGwidth; j++)
+            for (int repeat = 0; repeat < n; repeat++)
             {
-                // temporary storage
-                RGBTRIPLE triple;
+                // iterate over pixels in scanline
+                for (int j = 0; j < OGwidth; j++)
+                {
+                    // temporary storage
+                    RGBTRIPLE triple;
 
-                // read RGB triple from infile
-                fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+                    // read RGB triple from infile
+                    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-                // write RGB triple to outfile
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                    // write RGB triple to outfile
+                     for (int x = 0; x < n; x++)
+                     {
+                        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                     }
+                    // set cursor back to begining
+                    //  fseek(outptr, OGwidth, SEEK_SET);
 
-                // set cursor back to begining
-                 fseek(outptr, OGwidth, SEEK_SET);
-            }
+                }
 
 
-            // skip over padding, if any
-            fseek(inptr, OGpadding, SEEK_CUR);
+                // skip over padding, if any
+                fseek(inptr, OGpadding, SEEK_CUR);
 
-            // then add it back (to demonstrate how)
-            for (int k = 0; k < newPadding; k++)
-            {
-                fputc(0x00, outptr);
+                // then add it back (to demonstrate how)
+                for (int k = 0; k < newPadding; k++)
+                {
+                    fputc(0x00, outptr);
+                }
+
+                if (repeat < n-1)
+                {
+                    // repeat over scanline n-1 times
+                    fseek(inptr, -(OGwidth * 3 + OGpadding), SEEK_CUR);
+                }
             }
         }
     // }
