@@ -67,9 +67,6 @@ int main(int argc, char *argv[])
         return 4;
     }
 
-    // determine padding for scanlines
-    // int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-
     // before writing to outptr- MODIFY THE HEADERS
     bi.biWidth *= n;
     bi.biHeight *= n;
@@ -86,48 +83,45 @@ int main(int argc, char *argv[])
     // write outfile's BITMAPINFOHEADER
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-        // iterate over infile's scanlines
-        for (int i = 0, biHeight = abs(OGheight); i < biHeight; i++)
+    // iterate over infile's scanlines
+    for (int i = 0, biHeight = abs(OGheight); i < biHeight; i++)
+    {
+        for (int repeat = 0; repeat < n; repeat++)
         {
-            for (int repeat = 0; repeat < n; repeat++)
+            // iterate over pixels in scanline
+            for (int j = 0; j < OGwidth; j++)
             {
-                // iterate over pixels in scanline
-                for (int j = 0; j < OGwidth; j++)
+                // temporary storage
+                RGBTRIPLE triple;
+
+                // read RGB triple from infile
+                fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+                // write RGB triple to outfile
+                for (int x = 0; x < n; x++)
                 {
-                    // temporary storage
-                    RGBTRIPLE triple;
-
-                    // read RGB triple from infile
-                    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-                    // write RGB triple to outfile
-                     for (int x = 0; x < n; x++)
-                     {
-                        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-                     }
-                    // set cursor back to begining
-                    //  fseek(outptr, OGwidth, SEEK_SET);
-
-                }
-
-
-                // skip over padding, if any
-                fseek(inptr, OGpadding, SEEK_CUR);
-
-                // then add it back (to demonstrate how)
-                for (int k = 0; k < newPadding; k++)
-                {
-                    fputc(0x00, outptr);
-                }
-
-                if (repeat < n-1)
-                {
-                    // repeat over scanline n-1 times
-                    fseek(inptr, -(OGwidth * 3 + OGpadding), SEEK_CUR);
+                    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
                 }
             }
+
+            // skip over padding, if any
+            fseek(inptr, OGpadding, SEEK_CUR);
+
+            // then add newPadding
+            for (int k = 0; k < newPadding; k++)
+            {
+                fputc(0x00, outptr);
+            }
+
+            if (repeat < n - 1)
+            {
+                // repeat over scanline n-1 times
+
+                fseek(inptr, -(OGwidth * 3 + OGpadding), SEEK_CUR);
+            }
         }
-    // }
+    }
+
     // close infile
     fclose(inptr);
 
