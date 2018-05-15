@@ -19,6 +19,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    char buffer[512];
+    char filename[50];
+    int x = 1;
+
 
 
     // Recall the possibility of slack space. odds are it’d been "zeroed" (i.e., filled with 0s)
