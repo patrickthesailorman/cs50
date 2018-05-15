@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
             sprintf(filename, "%03i.jpg", x);
             // filename: char array to store resultant string
             FILE *img = fopen(filename, "w");
+
+            fwrite(buffer, 512, 1, *img); // Write to file units of 512 B
         }
     }
 
