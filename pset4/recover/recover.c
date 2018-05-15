@@ -28,7 +28,9 @@ int main(int argc, char *argv[])
         // Find the first three bytes of JPEGs: 0xff 0xd8 0xff
         if(buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) // last byte: 0xe0, 0xe1, 0xe2.....0xef
         {
-
+            sprintf(filename, "%03i.jpg", x);
+            // filename: char array to store resultant string
+            FILE *img = fopen(filename, "w");
         }
     }
 
