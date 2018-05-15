@@ -11,7 +11,13 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Usage: ./recover image\n");
         return 1;
     }
+    FILE *file = fopen(argv[1], "r");
 
+    if( file == NULL) // Check for NULL
+    {
+        fprintf(stderr, "Error: NULL\n");
+        return 1;
+    }
 
 
 
