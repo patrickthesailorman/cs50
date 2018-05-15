@@ -23,6 +23,15 @@ int main(int argc, char *argv[])
     char filename[50];
     int x = 1;
 
+    while(fread(buffer, 512, 1, argv[1]) == 1) // Iterate over a copy
+    {
+        // Find the first three bytes of JPEGs: 0xff 0xd8 0xff
+        if(buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) // last byte: 0xe0, 0xe1, 0xe2.....0xef
+        {
+
+        }
+    }
+
 
 
     // Recall the possibility of slack space. odds are it’d been "zeroed" (i.e., filled with 0s)
