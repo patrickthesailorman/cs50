@@ -30,35 +30,36 @@ int main(int argc, char *argv[])
 
     // While not EOF
     while (feof(file) == 0) {
-    fread(buffer, 512, 1, argv[1]) == 1) // Iterate over a copy
+    fread(&buffer, 512, 1, file); // Iterate over a copy
     {
         // Find the first three bytes of JPEGs: 0xff 0xd8 0xff
         if(buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) // last byte: 0xe0, 0xe1, 0xe2.....0xef
         {
             if (x != 0) {
-                fclose(*img);
+                fclose(img);
             }
              // Open a new jpg file
 
             sprintf(filename, "%03i.jpg", x);
             // filename: char array to store resultant string
-            *img = fopen(filename, "w");
+            img = fopen(filename, "w");
             x++; // Increment file count
 
             if (x != 0) {
-                fwrite(buffer, 512, 1, *img); // Write to file units of 512 B
+
+                fwrite(buffer, 512, 1, img); // Write to file units of 512 B
             }
 
         }
-        else if(x = 1 && buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
-        {
-            x++;
-            sprintf(filename, "%03i.jpg", x);
-            // filename: char array to store resultant string
-            FILE *img = fopen(filename, "w");
+        // else if(x = 1 && buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
+        // {
+        //     x++;
+        //     sprintf(filename, "%03i.jpg", x);
+        //     // filename: char array to store resultant string
+        //     FILE *img = fopen(filename, "w");
 
-            fwrite(buffer, 512, 1, *img); // Write to file units of 512 B
-        }
+        //     fwrite(buffer, 512, 1, *img); // Write to file units of 512 B
+        // }
         else if(buffer != 512)
         {
             fprintf("End of File!");
