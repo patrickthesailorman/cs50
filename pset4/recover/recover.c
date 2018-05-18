@@ -19,13 +19,13 @@ int main(int argc, char *argv[])
     FILE *img = NULL;
     // char fileName[8]; //JPEG filename
 
-    if(file == NULL) // Check for NULL
+    if (file == NULL) // Check for NULL
     {
         fprintf(stderr, "Error: NULL\n");
         return 1;
     }
     unsigned char buffer[SIZE];
-    // BYTE buffer[512];
+
     char filename[50]; //JPEG filename
     int x = 0; // JPEG filecounter
 
@@ -33,32 +33,29 @@ int main(int argc, char *argv[])
     while (feof(file) == 0)
     {
         fread(buffer, SIZE, 1, file); // Iterate over a copy
-            // Find the first three bytes of JPEGs: 0xff 0xd8 0xff
-            if(buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) // last byte: 0xe0, 0xe1, 0xe2.....0xef
-            {
-                if (x != 0)
-                {
-                    fclose(img);
-                }
-                 // Open a new jpg file
-
-                sprintf(filename, "%03i.jpg", x);
-                // filename: char array to store resultant string
-                img = fopen(filename, "w");
-                x++; // Increment file count
-            }
-
+        // Find the first three bytes of JPEGs: 0xff 0xd8 0xff
+        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff
+            && (buffer[3] & 0xf0) == 0xe0) // last byte: 0xe0, 0xe1, 0xe2.....0xef
+        {
             if (x != 0)
             {
-            fwrite(&buffer, SIZE, 1, img); // Write to file units of 512 B
+                fclose(img);
             }
+            // Open a new jpg file
+            sprintf(filename, "%03i.jpg", x);
+            // filename: char array to store resultant string
+            img = fopen(filename, "w");
+            x++; // Increment file count
+        }
 
-
-            // else if(buffer != 512)
-            // {
-            //     printf("End of File!");
-            //     return 3;
-            // }
+        if (x != 0)
+        {
+            fwrite(&buffer, SIZE, 1, img); // Write to file units of 512 B
+        }
+        if (SIZE < 512)
+        {
+            fclose(img);
+        }
         // open card file
         // repeat until end of card
         //  read 512 bytes into a buffer
