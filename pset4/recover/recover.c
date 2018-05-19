@@ -4,7 +4,6 @@
 #include <stdint.h>
 
 #define SIZE 512
-// #include "card.raw"
 
 int main(int argc, char *argv[])
 {
@@ -26,13 +25,13 @@ int main(int argc, char *argv[])
     }
     unsigned char buffer[SIZE];
 
-    char filename[50]; //JPEG filename
+    char filename[8]; //JPEG filename
     int x = 0; // JPEG filecounter
 
     // While not EOF
     while (feof(file) == 0)
     {
-        fread(buffer, SIZE, 1, file); // Iterate over a copy
+         fread(&buffer, SIZE, 1, file); // Iterate over a copy
         // Find the first three bytes of JPEGs: 0xff 0xd8 0xff
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff
             && (buffer[3] & 0xf0) == 0xe0) // last byte: 0xe0, 0xe1, 0xe2.....0xef
@@ -52,10 +51,11 @@ int main(int argc, char *argv[])
         {
             fwrite(&buffer, SIZE, 1, img); // Write to file units of 512 B
         }
-        if (SIZE < 512)
-        {
-            fclose(img);
-        }
+        // if (SIZE < 512)
+        // {
+        //     fclose(buffer);
+        //     fclose(img);
+        // }
         // open card file
         // repeat until end of card
         //  read 512 bytes into a buffer
