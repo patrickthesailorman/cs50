@@ -14,7 +14,11 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    //load dictionary
+    FILE *f = fopen(filename, "./dictionaries/small");
+    if (f == NULL)
+	{
+		return false;
+	}
     return false;
 }
 
