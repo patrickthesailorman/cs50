@@ -14,12 +14,22 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
+    typedef struct node
+    {
+        // Marker for end of word
+        bool is_word;
+        // Pointers to other nodes
+        struct node* children[27];
+    }
+    node;
+
     FILE *f = fopen(filename, "./dictionaries/small");
     if (f == NULL)
 	{
 		return false;
+	} else {
+    return true;
 	}
-    return false;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
