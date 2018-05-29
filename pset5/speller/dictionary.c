@@ -30,6 +30,28 @@ bool load(const char *dictionary)
 	} else {
     return true;
 	}
+	node *  temp;
+
+	while (fscanf(dict, "%s", word) != EOF)
+    {
+        temp = root;
+         //iterate through the word
+    for (int i = 0; i < strlen(word); i++)
+    {
+        //store word's characters in variable c, one at a time, then zero-index it.
+        char c = word[i];
+        int index = tolower(c) - 'a';
+
+        //malloc a new node at the point where the character is.
+        if (root->children[index] == NULL)
+        {
+            root->children[index] = malloc(sizeof(node));
+        }
+        else if (root->children[index]->children[i] == NULL)
+        {
+            root->children[index]->children[i + 1] = malloc(sizeof(node));
+        }
+    }
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
