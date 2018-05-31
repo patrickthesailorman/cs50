@@ -20,36 +20,40 @@ bool load(const char *dictionary)
        struct node *next;
     }
     node;
-    node *node1 = malloc(sizeof(node));
 
-    FILE *f = fopen(filename, "./dictionaries/small");
+    node *hashtable[50];
+    // node *node1 = malloc(sizeof(node));
+    // node *node2 = malloc(sizeof(node));
+    // node1->next = node2;
+
+    FILE *f = fopen(filename, "./dictionaries/large");
     if (f == NULL)
 	{
 		return false;
 	} else {
     return true;
 	}
-	node *  temp;
+	node *  head;
 
-	while (fscanf(dict, "%s", word) != EOF)
+	while (fscanf(f, "%s", word) != EOF)
     {
-        temp = root;
-         //iterate through the word
-    for (int i = 0; i < strlen(word); i++)
-    {
-        //store word's characters in variable c, one at a time, then zero-index it.
-        char c = word[i];
-        int index = tolower(c) - 'a';
+       node *new_node = malloc(sizeof(node));
+       if (new_node == NULL)
+       {
+           unload();
+           return false;
+       } else
+       {
+           strcopy(new_node->word, word);
+       }
 
-        //malloc a new node at the point where the character is.
-        if (root->children[index] == NULL)
-        {
-            root->children[index] = malloc(sizeof(node));
-        }
-        else if (root->children[index]->children[i] == NULL)
-        {
-            root->children[index]->children[i + 1] = malloc(sizeof(node));
-        }
+    new_node->next = head;
+    head = new_node;
+
+    // foreach (word in f)
+    for (var i = 0; i < f.length; i ++)
+    {
+
     }
 }
 
