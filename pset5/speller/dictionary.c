@@ -50,11 +50,11 @@ bool load(const char *dictionary)
     new_node->next = head;
     head = new_node;
 
-    // foreach (word in f)
-    for (var i = 0; i < f.length; i ++)
-    {
+   int hash_function(char*key)
+   // Hash on the first letter of string
+   int hash = tolower(key[0]-'a');
 
-    }
+   return hash % SIZE;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
