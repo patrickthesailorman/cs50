@@ -16,12 +16,11 @@ bool load(const char *dictionary)
 {
     typedef struct node
     {
-        // Marker for end of word
-        bool is_word;
-        // Pointers to other nodes
-        struct node* children[27];
+       char word[LENGTH +1];
+       struct node *next;
     }
     node;
+    node *node1 = malloc(sizeof(node));
 
     FILE *f = fopen(filename, "./dictionaries/small");
     if (f == NULL)
