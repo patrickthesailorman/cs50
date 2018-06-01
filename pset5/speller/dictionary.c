@@ -4,35 +4,55 @@
 
 #include "dictionary.h"
 
-int count = 0; // Word Counter
+unsigned int count = 0; // Word Counter
+
+// global boolean for tracking load/unload dictionary operations
+bool loaded = false;
 
 typedef struct node
-    {
-       char word[LENGTH +1];
-       struct node *next;
-    }
-    node;
+{
+    char word[LENGTH + 1];
+    struct node *next;
+}
+node;
 
-    node *hashtable[27];
+node *hashtable[HASHTABLE_SIZE];
 
-    int hash_function(const char*word)
-    {
+int hash_func(const char *word)
+{
     // Hash on the first letter of string
-    int hash = tolower(word[0]-'a');
+    int hash = tolower(word[0] - 'a');
 
     // return hash % SIZE;
-    return hash;
-    }
+    return hash % HASHTABLE_SIZE;
+}
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    node *cursor = head;
+    // create char array to store copy of word
+    // word is a const char* and non-read actions cannot be performed on it
+    int len = strlen(word);
+    char word_copy[len + 1];
+    // add null terminator to end of char array
+    word_copy[len] = '\0';
+
+    // get hash value (a.k.a. bucket)
+    int h = hash_func(word_copy);
+
+    node *cursor = hashtable[h];
     while (cursor != NULL)
     {
-        if (strcmp(word == cursor))
-        return true;
-        cursor = cursor->next;
+        if (strcmp(cursor->word, word_copy) == 0)
+        {
+            // word is in dictionary
+            return true;
+        }
+        else
+        {
+            // check next node
+            cursor = cursor->next;
+        }
     }
     return false;
 }
@@ -40,33 +60,54 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    FILE *f = fopen(filename, "./dictionaries/large");
-    if (f == NULL)
-	{
-		return false;
-	} else {
-    return true;
-	}
-	node *  head;
-
-	while (fscanf(f, "%s", word) != EOF)
+    // make all hash table elements NULL
+    for (int i = 0; i < HASHTABLE_SIZE; i++)
     {
-       count++;
+        hashtable[i] = NULL;
+    }
 
-       node *new_node = malloc(sizeof(node));
-       if (new_node == NULL)
-       {
-           unload();
-           return false;
-       } else
-       {
-           strcpy(new_node->word, word);
-       }
+    FILE *f = fopen(dictionary, "r");
+    if (f == NULL)
+    {
+        printf("Could not open dictionary.\n");
+        return false;
+    }
 
-    new_node->next = head;
-    head = new_node;
+    node *new_node = malloc(sizeof(node));
 
+    while (fscanf(f, "%s", new_node->word) != EOF)
+    {
+        count++;
 
+        if (new_node == NULL)
+        {
+            unload();
+            return false;
+        }
+        else
+        {
+            // hashtable[h] is a pointer to a key-value pair
+            int h = hash_func(new_node->word);
+            node *head = hashtable[h];
+
+            // if bucket is empty, insert the first node
+            if (head == NULL)
+            {
+                hashtable[h] = new_node;
+            }
+            // if bucket is not empty, attach node to front of list
+            else
+            {
+                new_node->next = hashtable[h];
+                hashtable[h] = new_node;
+            }
+        }
+    }
+
+    // close dictionary
+    fclose(f);
+    loaded = true;
+    return true;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
@@ -76,20 +117,27 @@ unsigned int size(void)
     {
         return 0;
     }
-
-    return count;
+    else
+    {
+        return count;
+    }
 }
 
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    node *cursor = head; // hash? word?
-    while (cursor != NULL)
+    for (int i = 0; i < HASHTABLE_SIZE; i++)
     {
-        node *temp = cursor;
-        cursor = cursor->next;
-        free(temp);
-        return true;
+        node *cursor = hashtable[i];
+        while (cursor != NULL)
+        {
+            node *temp = cursor;
+            cursor = cursor->next;
+            free(temp);
+            loaded = false;
+            return true;
+        }
     }
+
     return false;
 }
