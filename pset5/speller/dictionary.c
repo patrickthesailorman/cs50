@@ -4,6 +4,26 @@
 
 #include "dictionary.h"
 
+int count = 0; // Word Counter
+
+typedef struct node
+    {
+       char word[LENGTH +1];
+       struct node *next;
+    }
+    node;
+
+    node *hashtable[27];
+
+    int hash_function(const char*word)
+    {
+    // Hash on the first letter of string
+    int hash = tolower(word[0]-'a');
+
+    // return hash % SIZE;
+    return hash;
+    }
+
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
@@ -14,18 +34,6 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    typedef struct node
-    {
-       char word[LENGTH +1];
-       struct node *next;
-    }
-    node;
-
-    node *hashtable[50];
-    // node *node1 = malloc(sizeof(node));
-    // node *node2 = malloc(sizeof(node));
-    // node1->next = node2;
-
     FILE *f = fopen(filename, "./dictionaries/large");
     if (f == NULL)
 	{
@@ -37,6 +45,8 @@ bool load(const char *dictionary)
 
 	while (fscanf(f, "%s", word) != EOF)
     {
+       count++;
+
        node *new_node = malloc(sizeof(node));
        if (new_node == NULL)
        {
@@ -50,11 +60,7 @@ bool load(const char *dictionary)
     new_node->next = head;
     head = new_node;
 
-   int hash_function(char*key)
-   // Hash on the first letter of string
-   int hash = tolower(key[0]-'a');
 
-   return hash % SIZE;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
