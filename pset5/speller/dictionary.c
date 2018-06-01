@@ -30,7 +30,8 @@ bool check(const char *word)
     node *cursor = head;
     while (cursor != NULL)
     {
-        // do something
+        if (strcmp(word == cursor))
+        return true;
         cursor = cursor->next;
     }
     return false;
@@ -59,7 +60,7 @@ bool load(const char *dictionary)
            return false;
        } else
        {
-           strcopy(new_node->word, word);
+           strcpy(new_node->word, word);
        }
 
     new_node->next = head;
@@ -78,6 +79,13 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
+    node *cursor = head;
+    while (cursor != NULL)
+    {
+        node *temp = cursor;
+        cursor = cursor->next;
+        free(temp);
+        return true;
+    }
     return false;
 }

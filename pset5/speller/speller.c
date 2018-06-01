@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sys/resource.h>
 #include <sys/time.h>
+#include <string.h>
 
 #include "dictionary.h"
 
