@@ -1,12 +1,20 @@
 // Implements a dictionary's functionality
 
 #include <stdbool.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
 
 #include "dictionary.h"
 
+// number of buckets in the hash table
+#define HASHTABLE_SIZE 500000
+
 unsigned int count = 0; // Word Counter
 
-// global boolean for tracking load/unload dictionary operations
+// Tracking load/unload dictionary
 bool loaded = false;
 
 typedef struct node
@@ -20,30 +28,22 @@ node *hashtable[HASHTABLE_SIZE];
 
 int hash_func(const char *word)
 {
-    // Hash on the first letter of string
+    // Hash on the first letter of word
     int hash = tolower(word[0] - 'a');
 
-    // return hash % SIZE;
-    return hash % HASHTABLE_SIZE;
+    return hash % HASHTABLE_SIZE; // avoids indexing into a hash table slot that does not exist
 }
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // create char array to store copy of word
-    // word is a const char* and non-read actions cannot be performed on it
-    int len = strlen(word);
-    char word_copy[len + 1];
-    // add null terminator to end of char array
-    word_copy[len] = '\0';
+    int h = hash_func(word); // Get hash bucket
 
-    // get hash value (a.k.a. bucket)
-    int h = hash_func(word_copy);
+    node *cursor = hashtable[h]; // Puts cursor on first node
 
-    node *cursor = hashtable[h];
     while (cursor != NULL)
     {
-        if (strcmp(cursor->word, word_copy) == 0)
+        if (strcmp(word, cursor->word) == 0)
         {
             // word is in dictionary
             return true;
@@ -70,10 +70,12 @@ bool load(const char *dictionary)
     if (f == NULL)
     {
         printf("Could not open dictionary.\n");
+        unload();
         return false;
     }
 
     node *new_node = malloc(sizeof(node));
+    char word[LENGTH + 1];
 
     while (fscanf(f, "%s", new_node->word) != EOF)
     {
@@ -86,8 +88,9 @@ bool load(const char *dictionary)
         }
         else
         {
+            strcpy(new_node->word, word);
             // hashtable[h] is a pointer to a key-value pair
-            int h = hash_func(new_node->word);
+            int h = hash_func(word);
             node *head = hashtable[h];
 
             // if bucket is empty, insert the first node
@@ -96,11 +99,10 @@ bool load(const char *dictionary)
                 hashtable[h] = new_node;
             }
             // if bucket is not empty, attach node to front of list
-            else
-            {
-                new_node->next = hashtable[h];
-                hashtable[h] = new_node;
-            }
+
+            new_node->next = hashtable[h];
+            hashtable[h] = new_node;
+
         }
     }
 
