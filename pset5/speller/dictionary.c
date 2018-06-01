@@ -27,7 +27,12 @@ typedef struct node
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
+    node *cursor = head;
+    while (cursor != NULL)
+    {
+        // do something
+        cursor = cursor->next;
+    }
     return false;
 }
 
