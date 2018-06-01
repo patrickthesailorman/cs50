@@ -72,14 +72,18 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    if (!loaded)
+    {
+        return 0;
+    }
+
+    return count;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    node *cursor = head;
+    node *cursor = head; // hash? word?
     while (cursor != NULL)
     {
         node *temp = cursor;
