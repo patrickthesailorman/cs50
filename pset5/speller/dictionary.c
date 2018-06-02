@@ -1,31 +1,31 @@
 // Implements a dictionary's functionality
 
-#include <stdbool.h>
 #include <ctype.h>
-#include <string.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <strings.h>
 
 #include "dictionary.h"
 
-// number of buckets in the hash table
 #define HASHTABLE_SIZE 500000
-
-unsigned int count = 0; // Word Counter
-
-// Tracking load/unload dictionary
-bool loaded = false;
 
 typedef struct node
 {
     char word[LENGTH + 1];
-    struct node *next;
+    struct node *next; // Points to the next node in the linked list
 }
 node;
 
 node *hashtable[HASHTABLE_SIZE];
 
+// const int HASHTABLE_SIZE = 26; // number of buckets in the hash table
+int count = 0; // Word Counter
+int h; // hash index
+bool loaded = false; // Tracking load/unload dictionary
+
+// Hash Function via https://study.cs50.net/hashtables
 int hash_func(const char *word)
 {
     // Hash on the first letter of word
@@ -37,12 +37,13 @@ int hash_func(const char *word)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    int h = hash_func(word); // Get hash bucket
+    h = hash_func(word); // Get hash bucket
 
     node *cursor = hashtable[h]; // Puts cursor on first node
 
     while (cursor != NULL)
     {
+        // if (strcasecmp(word, cursor->word) == 0)
         if (strcmp(word, cursor->word) == 0)
         {
             // word is in dictionary
@@ -74,12 +75,12 @@ bool load(const char *dictionary)
         return false;
     }
 
-    node *new_node = malloc(sizeof(node));
     char word[LENGTH + 1];
 
-    while (fscanf(f, "%s", new_node->word) != EOF)
+    while (fscanf(f, "%s", word) != EOF)
     {
         count++;
+        node *new_node = malloc(sizeof(node));
 
         if (new_node == NULL)
         {
@@ -90,7 +91,7 @@ bool load(const char *dictionary)
         {
             strcpy(new_node->word, word);
             // hashtable[h] is a pointer to a key-value pair
-            int h = hash_func(word);
+            h = hash_func(word);
             node *head = hashtable[h];
 
             // if bucket is empty, insert the first node

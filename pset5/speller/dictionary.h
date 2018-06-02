@@ -10,6 +10,7 @@
 #define LENGTH 45
 
 // Prototypes
+int hash_func(const char *word);
 bool check(const char *word);
 bool load(const char *dictionary);
 unsigned int size(void);
