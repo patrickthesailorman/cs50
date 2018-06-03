@@ -22,9 +22,7 @@ node *hashtable[HASHTABLE_SIZE];
 
 // const int HASHTABLE_SIZE = 26; // number of buckets in the hash table
 int count = 0; // Word Counter
-int h; // hash index
 unsigned int hash; // hash index
-bool loaded = false; // Tracking load/unload dictionary
 
 // Hash Function via https://study.cs50.net/hashtables modified with help from @StephanieShea
 int hash_func(const char *word)
@@ -104,7 +102,6 @@ bool load(const char *dictionary)
 
     // close dictionary
     fclose(f);
-    loaded = true;
     return true;
 }
 
