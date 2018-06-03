@@ -68,10 +68,10 @@ bool load(const char *dictionary)
 {
      char word[LENGTH + 1];
     // make all hash table elements NULL
-    // for (int i = 0; i < HASHTABLE_SIZE; i++)
-    // {
-    //     hashtable[i] = NULL;
-    // }
+    for (int i = 0; i < HASHTABLE_SIZE; i++)
+    {
+        hashtable[i] = NULL;
+    }
 
     FILE *f = fopen(dictionary, "r");
     if (f == NULL)
@@ -85,7 +85,7 @@ bool load(const char *dictionary)
     {
         count++;
         // hashtable[h] is a pointer to a key-value pair
-        h = hash_func(word);
+        hash = hash_func(word);
         node *new_node = malloc(sizeof(node));
 
         if (new_node == NULL)
@@ -96,15 +96,6 @@ bool load(const char *dictionary)
         else
         {
             strcpy(new_node->word, word);
-
-            node *head = hashtable[h];
-
-            // if bucket is empty, insert the first node
-            if (head == NULL)
-            {
-                hashtable[h] = new_node;
-            }
-            // if bucket is not empty, attach node to front of list
 
             new_node->next = hashtable[h];
             hashtable[h] = new_node;
@@ -121,14 +112,7 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    if (!loaded)
-    {
-        return 0;
-    }
-    else
-    {
         return count;
-    }
 }
 
 // Unloads dictionary from memory, returning true if successful else false
