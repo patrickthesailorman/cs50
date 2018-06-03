@@ -97,8 +97,8 @@ bool load(const char *dictionary)
         {
             strcpy(new_node->word, word);
 
-            new_node->next = hashtable[h];
-            hashtable[h] = new_node;
+            new_node->next = hashtable[hash];
+            hashtable[hash] = new_node;
 
         }
     }
@@ -126,10 +126,7 @@ bool unload(void)
             node *temp = cursor;
             cursor = cursor->next;
             free(temp);
-            loaded = false;
-            return true;
         }
     }
-    // return true;
-    return false;
+    return true;
 }
