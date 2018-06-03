@@ -23,13 +23,18 @@ node *hashtable[HASHTABLE_SIZE];
 // const int HASHTABLE_SIZE = 26; // number of buckets in the hash table
 int count = 0; // Word Counter
 int h; // hash index
+unsigned int hash; // hash index
 bool loaded = false; // Tracking load/unload dictionary
 
-// Hash Function via https://study.cs50.net/hashtables
+// Hash Function via https://study.cs50.net/hashtables modified with help from @StephanieShea
 int hash_func(const char *word)
 {
-    // Hash on the first letter of word
-    int hash = tolower(word[0] - 'a');
+    hash = 0;
+    for (int i = 0, n = strlen(word); i < n; i++)
+    {
+        hash = (hash << 2) ^ tolower(word[i]);
+    }
+
 
     return hash % HASHTABLE_SIZE; // avoids indexing into a hash table slot that does not exist
 }
@@ -37,14 +42,14 @@ int hash_func(const char *word)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    h = hash_func(word); // Get hash bucket
+    hash = hash_func(word); // Get hash bucket
 
-    node *cursor = hashtable[h]; // Puts cursor on first node
+    node *cursor = hashtable[hash]; // Puts cursor on first node
 
     while (cursor != NULL)
     {
-        // if (strcasecmp(word, cursor->word) == 0)
-        if (strcmp(word, cursor->word) == 0)
+        if (strcasecmp(word, cursor->word) == 0)
+        // if (strcmp(word, cursor->word) == 0)
         {
             // word is in dictionary
             return true;
@@ -61,11 +66,12 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
+     char word[LENGTH + 1];
     // make all hash table elements NULL
-    for (int i = 0; i < HASHTABLE_SIZE; i++)
-    {
-        hashtable[i] = NULL;
-    }
+    // for (int i = 0; i < HASHTABLE_SIZE; i++)
+    // {
+    //     hashtable[i] = NULL;
+    // }
 
     FILE *f = fopen(dictionary, "r");
     if (f == NULL)
@@ -75,11 +81,11 @@ bool load(const char *dictionary)
         return false;
     }
 
-    char word[LENGTH + 1];
-
     while (fscanf(f, "%s", word) != EOF)
     {
         count++;
+        // hashtable[h] is a pointer to a key-value pair
+        h = hash_func(word);
         node *new_node = malloc(sizeof(node));
 
         if (new_node == NULL)
@@ -90,8 +96,7 @@ bool load(const char *dictionary)
         else
         {
             strcpy(new_node->word, word);
-            // hashtable[h] is a pointer to a key-value pair
-            h = hash_func(word);
+
             node *head = hashtable[h];
 
             // if bucket is empty, insert the first node
