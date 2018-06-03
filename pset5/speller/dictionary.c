@@ -9,7 +9,7 @@
 
 #include "dictionary.h"
 
-#define HASHTABLE_SIZE 500000
+#define HASHTABLE_SIZE 5000
 
 typedef struct node
 {
@@ -49,7 +49,6 @@ bool check(const char *word)
     while (cursor != NULL)
     {
         if (strcasecmp(word, cursor->word) == 0)
-        // if (strcmp(word, cursor->word) == 0)
         {
             // word is in dictionary
             return true;
@@ -66,7 +65,7 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-     char word[LENGTH + 1];
+    char word[LENGTH + 1];
     // make all hash table elements NULL
     for (int i = 0; i < HASHTABLE_SIZE; i++)
     {
@@ -112,7 +111,7 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-        return count;
+    return count;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
