@@ -9,7 +9,7 @@
 
 #include "dictionary.h"
 
-#define HASHTABLE_SIZE 5000
+#define HASHTABLE_SIZE 5000 // bigger number runs faster
 
 typedef struct node
 {
