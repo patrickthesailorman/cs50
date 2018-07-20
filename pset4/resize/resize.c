@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
                 fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
                 // write RGB triple to outfile
-                for (int x = 0; x < n; x++)
+                for (int pixel = 0; pixel < n; pixel++)
                 {
                     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
                 }
