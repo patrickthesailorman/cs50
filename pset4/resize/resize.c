@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
                 // read RGB triple from infile
                 fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-                // write RGB triple to outfile
+                // write RGB triple to outfile or writes each pixel
                 for (int pixel = 0; pixel < n; pixel++)
                 {
                     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
