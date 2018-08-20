@@ -9,6 +9,7 @@ def get_positive_int(prompt):
         n = get_int(prompt)
         if n >= 1:
             break
+        return n
 
 if __name__ == "__main__":
     main()
