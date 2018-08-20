@@ -1,4 +1,4 @@
-from cs50 import get_int
+import cs50
 
 def main():
     i = get_positive_int("positive integer, please: ")
@@ -6,7 +6,7 @@ def main():
 
 def get_positive_int(prompt):
     while True:
-        n = get_int(prompt)
+        n = cs50.get_int(prompt)
         if n >= 1:
             break
         return n
