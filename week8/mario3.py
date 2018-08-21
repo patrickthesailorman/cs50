@@ -10,4 +10,5 @@ while True:
 
 # Print out that many bricks
 for i in range(n):
-    print("#")
+    print("#", end="")
+print()
