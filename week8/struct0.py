@@ -3,3 +3,6 @@ from student import Student
 
 students = []
 dorms = []
+
+for i in range(3):
+    name = get_string("Name: ")
