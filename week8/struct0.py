@@ -6,3 +6,4 @@ dorms = []
 
 for i in range(3):
     name = get_string("Name: ")
+    dorm = get_string("Dorm: ")
