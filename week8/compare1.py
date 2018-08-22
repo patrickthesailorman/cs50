@@ -5,3 +5,5 @@ t = get_string("t: ")
 
 if s == t:
     print("same")
+else:
+    print("different")
