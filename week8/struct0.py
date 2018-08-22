@@ -11,5 +11,6 @@ for i in range(3):
     students.append(s)
 
 for student in students:
+    print(f"{student.name} lives in {student.dorm}")
 
 
