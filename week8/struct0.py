@@ -10,3 +10,6 @@ for i in range(3):
     s = Student(name, dorm)
     students.append(s)
 
+for student in students:
+
+
