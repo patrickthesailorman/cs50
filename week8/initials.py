@@ -4,5 +4,5 @@ s = get_string("name: ")
 initials = ""
 for c in s:
     if c.isupper():
-        append c to initials
+        initials += c
 print(initials)
