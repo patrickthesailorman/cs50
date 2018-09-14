@@ -7,10 +7,10 @@ for i in range(n):
 
     # Print out this many columns
     for j in range(n - i - 1):
-         print(" ", end="")
+         print("#", end="")
 
          for k in range (j < 2 + i):
-             print("#", end="")
+             print(" ", end="")
     print()
 
 
