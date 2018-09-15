@@ -11,9 +11,10 @@ for i in range(n):
 
     # Print out this many columns
     j = 0
-    for j in range(n - i):
+    for j in range(n - i - 1):
         print(" ", end="")
-        for k in range(j < 1 + i):
+        k = 0
+        for k in range(k < 2 + i):
             print("#", end="")
     print()
 
