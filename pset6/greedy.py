@@ -9,7 +9,7 @@ cents = round(change * 100) # Convert float to int
 coins = 0
 
 # Will it take a quater, how many
-while cents > 25
+while cents >= 25
 
          coins ++;
          cents -= 25;
@@ -33,7 +33,7 @@ while cents > 25
          cents -= 1;
 
 # return total number of coins used to make change
-     print("Total coins: ", coins)
+     print(f"Total coins: {coins}")
 
 # #include <cs50.h>
 # #include <stdio.h>
