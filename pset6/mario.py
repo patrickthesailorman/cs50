@@ -6,13 +6,15 @@ while True:
         break
 
 # Print out this many rows
+i = 0
 for i in range(n):
 
     # Print out this many columns
-    for j in range(n - i - 1):
+    j = 0
+    for j in range(n - i):
         print(" ", end="")
-        for k in range(j < 2 + i):
-             print("#", end="")
+    for k in range(j < 1 + i):
+         print("#", end="")
     print()
 
 
