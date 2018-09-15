@@ -13,8 +13,8 @@ for i in range(n):
     j = 0
     for j in range(n - i):
         print(" ", end="")
-    for k in range(j < 1 + i):
-         print("#", end="")
+        for k in range(j < 1 + i):
+            print("#", end="")
     print()
 
 
