@@ -1,15 +1,16 @@
 from cs50 import get_int
 
-n =  get_int("Number: ")
+while True:
+    n =  get_int("Number: ")
+    if n >= 1 or n < 25:
+        break
 
 # Print out this many rows
 for i in range(n):
-
     # Print out this many columns
     for j in range(n - i - 1):
          print(" ", end="")
-
-         for k in range (i < 2 + j):
+         for k in range (j < i + 1):
              print("#", end="")
     print()
 
