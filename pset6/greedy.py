@@ -9,22 +9,22 @@ cents = round(change * 100) # Convert float to int
 coins = 0
 
 # Will it take a quater, how many
-if cents >= 25:
+while cents >= 25:
     coins +=1
     cents -= 25
 
 # Will it take a dime, how many
-elif cents >= 10:
+while cents >= 10:
     coins += 1
     cents -= 10
 
 # Will it take a nickel, how many
-elif cents >= 5:
+while cents >= 5:
     coins += 1
     cents -= 5
 
 # Remainder in pennies
-elif cents >= 1:
+while cents >= 1:
     coins += 1
     cents -= 1
 
