@@ -1,6 +1,10 @@
 from cs50 import get_int
 from cs50 import get_string
+from cs50 import
 
+# isUpper
+# isLower
+# isAlpha
 
 # #include <cs50.h>
 # #include <ctype.h>
