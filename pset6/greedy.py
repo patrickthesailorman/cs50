@@ -14,19 +14,19 @@ if cents >= 25:
     cents -= 25
 
 # Will it take a dime, how many
-    while cents >= 10:
-         coins += 1
-         cents -= 10
+elif cents >= 10:
+    coins += 1
+    cents -= 10
 
 # Will it take a nickel, how many
-    while cents >= 5:
-        coins += 1
-        cents -= 5
+elif cents >= 5:
+    coins += 1
+    cents -= 5
 
 # Remainder in pennies
-    while cents >= 1:
-         coins += 1
-         cents -= 1
+elif cents >= 1:
+    coins += 1
+    cents -= 1
 
 # return total number of coins used to make change
     print(f"Total coins: {coins}")
