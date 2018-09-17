@@ -8,11 +8,15 @@ def main(argc, argv):
     while argc == 0 or argc < 2: # requires at least one argument to be the numerical key to cipher
         print("error")
 
-    value = int(argv[1]) # set key from string to integer
+    key = int(argv[1]) # set key from string to integer
     plainText = get_string("plaintext: ") # prompts user for string to encrypt
 
     for s in len(plainText): # iterate through the string
         for c in s: # iterate through each character
+            if plainText.isalpha(plainText[c]): # check if character is alphabetic
+                if plainText.isupper(plainText[c]): # preserve case of character
+                     cipherText = (plainText[c] - 'A' + key) % 26 + 'A' # to ascii to alphabetic index
+                     print("%c", cipherText)
 
 
 
