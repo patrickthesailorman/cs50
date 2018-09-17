@@ -1,7 +1,12 @@
 from cs50 import get_int
 from cs50 import get_string
+import sys
 
-def main(argc,argv[]):
+def main(argc, argv):
+    while argc == 0 or argc < 2:
+        print("error")
+
+
 
 
 
