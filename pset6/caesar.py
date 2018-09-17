@@ -2,11 +2,14 @@ from cs50 import get_int
 from cs50 import get_string
 import sys
 
+# caesars cipher
+
 def main(argc, argv):
-    while argc == 0 or argc < 2:
+    while argc == 0 or argc < 2: # requires at least one argument to be the numerical key to cipher
         print("error")
 
-
+    value = int(argv[1]) # set key from string to integer
+    print("plaintext: ")
 
 
 
