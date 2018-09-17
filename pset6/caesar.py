@@ -20,6 +20,11 @@ def main(argc, argv):
                 elif plainText.islower(plainText[c]):
                     cipherText = (plainText[c] - 'a' + key) % 26 + 'a'
                     print("%c", cipherText)
+            elif plainText.isalpha(plainText[c]) == False: # includes special characters
+                 cipherText = plainText[c];
+                 print("%c", cipherText);
+    print("\n");
+
 
 
 
