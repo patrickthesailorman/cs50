@@ -9,7 +9,12 @@ def main(argc, argv):
         print("error")
 
     value = int(argv[1]) # set key from string to integer
-    print("plaintext: ")
+    plainText = get_string("plaintext: ") # prompts user for string to encrypt
+
+    for s in len(plainText): # iterate through the string
+        for c in s: # iterate through each character
+
+
 
 
 
