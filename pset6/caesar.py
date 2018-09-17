@@ -17,6 +17,9 @@ def main(argc, argv):
                 if plainText.isupper(plainText[c]): # preserve case of character
                      cipherText = (plainText[c] - 'A' + key) % 26 + 'A' # to ascii to alphabetic index
                      print("%c", cipherText)
+                elif plainText.islower(plainText[c]):
+                    cipherText = (plainText[c] - 'a' + key) % 26 + 'a'
+                    print("%c", cipherText)
 
 
 
