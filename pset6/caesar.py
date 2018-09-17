@@ -1,10 +1,9 @@
 from cs50 import get_int
 from cs50 import get_string
-from cs50 import
 
-# isUpper
-# isLower
-# isAlpha
+def main(argc,argv[]):
+
+
 
 # #include <cs50.h>
 # #include <ctype.h>
