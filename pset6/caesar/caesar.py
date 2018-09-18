@@ -1,5 +1,4 @@
-from cs50 import get_int
-from cs50 import get_string
+import cs50
 import sys
 
 # caesars cipher
