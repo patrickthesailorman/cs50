@@ -1,3 +1,5 @@
+from cs50 import get_int
+from cs50 import get_string
 import cs50
 import sys
 
@@ -13,17 +15,16 @@ key = int(sys.argv[1])
 plainText = get_string("plaintext: ") # prompts user for string to encrypt
 ciphertext = []
 
-for s in range(len(plainText)): # iterate through the string
-    # for c in s: # iterate through each character
-    if plainText[s].isalpha(): # check if character is alphabetic
-        if plainText[s].isupper(): # preserve case of character
-             cipherText = (plainText[s] - 'A' + key) % 26 + 'A' # to ascii to alphabetic index
+for c in range(len(plainText)): # iterate through each character
+    if plainText[c].isalpha(): # check if character is alphabetic
+        if plainText[c].isupper(): # preserve case of character
+             cipherText = int(plainText[c].ord('A') + key)+ chr('A') # to ascii to alphabetic index
              print("%s", cipherText)
-        elif plainText[s].islower():
-            cipherText = (plainText[s] - 'a' + key) % 26 + 'a'
+        elif plainText[c].islower():
+            cipherText = int(plainText[c].ord('a') + key) + chr('a')
             print("%s", cipherText)
-    elif not plainText[s].isalpha(): # includes special characters
-         cipherText = plainText[s];
+    elif not plainText[c].isalpha(): # includes special characters
+         cipherText = plainText[c];
          print("%s", cipherText);
 print("Encrpyted: ", ciphertext)
 print("\n");
