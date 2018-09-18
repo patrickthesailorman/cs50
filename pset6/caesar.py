@@ -4,26 +4,33 @@ import sys
 
 # caesars cipher
 
-def main(argc, argv):
-    while argc == 0 or argc < 2: # requires at least one argument to be the numerical key to cipher
-        print("error")
+# def main(argv):
+key = int(sys.argv[1])
+# key = get_int("enter a number(key) between 3 and 26: ") # set key from string to integer
+# while key == 0 or key < 2: # requires at least one argument to be the numerical key to cipher
+#         print("error")
 
-    key = int(argv[1]) # set key from string to integer
-    plainText = get_string("plaintext: ") # prompts user for string to encrypt
 
-    for s in len(plainText): # iterate through the string
-        for c in s: # iterate through each character
-            if plainText.isalpha(plainText[c]): # check if character is alphabetic
-                if plainText.isupper(plainText[c]): # preserve case of character
-                     cipherText = (plainText[c] - 'A' + key) % 26 + 'A' # to ascii to alphabetic index
-                     print("%c", cipherText)
-                elif plainText.islower(plainText[c]):
-                    cipherText = (plainText[c] - 'a' + key) % 26 + 'a'
-                    print("%c", cipherText)
-            elif plainText.isalpha(plainText[c]) == False: # includes special characters
-                 cipherText = plainText[c];
-                 print("%c", cipherText);
-    print("\n");
+plainText = get_string("plaintext: ") # prompts user for string to encrypt
+ciphertext = []
+
+for s in range(len(plainText)): # iterate through the string
+    # for c in s: # iterate through each character
+    if plainText[s].isalpha(): # check if character is alphabetic
+        if plainText[s].isupper(): # preserve case of character
+             cipherText = (plainText[s] - 'A' + key) % 26 + 'A' # to ascii to alphabetic index
+             print("%s", cipherText)
+        elif plainText[s].islower():
+            cipherText = (plainText[s] - 'a' + key) % 26 + 'a'
+            print("%s", cipherText)
+    elif not plainText[s].isalpha(): # includes special characters
+         cipherText = plainText[s];
+         print("%s", cipherText);
+print("Encrpyted: ", ciphertext)
+print("\n");
+
+# if __name__ == "__main__":
+#    main(argv[1])
 
 
 
