@@ -13,24 +13,23 @@ key = int(sys.argv[1])
 
 
 plainText = get_string("plaintext: ") # prompts user for string to encrypt
-ciphertext = []
+print("Encrypted: ", end="")
 
 for c in range(len(plainText)): # iterate through each character
-    if plainText[c].isalpha(): # check if character is alphabetic
-        if plainText[c].isupper(): # preserve case of character
-             cipherText = int(plainText[c].ord('A') + key)+ chr('A') # to ascii to alphabetic index
-             print("%s", cipherText)
-        elif plainText[c].islower():
-            cipherText = int(plainText[c].ord('a') + key) + chr('a')
-            print("%s", cipherText)
+    character = plainText[c]
+    if character.isalpha(): # check if character is alphabetic
+        if character.isupper(): # preserve case of character
+             cipherText = ord(character) - ord('A') + key % 26 + ord('A') # to ascii to alphabetic index
+             cipherText = chr(cipherText)
+             print(cipherText, end="")
+        elif character.islower():
+            cipherText = ord(character) - ord('a') + key % 26 + ord('a')
+            cipherText = chr(cipherText)
+            print(cipherText, end="")
     elif not plainText[c].isalpha(): # includes special characters
-         cipherText = plainText[c];
-         print("%s", cipherText);
-print("Encrpyted: ", ciphertext)
-print("\n");
-
-# if __name__ == "__main__":
-#    main(argv[1])
+         cipherText = character;
+         print(cipherText, end="");
+print();
 
 
 
