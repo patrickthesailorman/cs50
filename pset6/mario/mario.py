@@ -1,7 +1,7 @@
 from cs50 import get_int
 
 while True:
-    n =  get_int("Number: ")
+    n = get_int("Number: ")
     if n >= 0 and n < 24:
         break
 
