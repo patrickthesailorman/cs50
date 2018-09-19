@@ -5,7 +5,7 @@ while True:
     if change > 0.00:
         break
 
-cents = round(change * 100) # Convert float to int
+cents = round(change * 100)  # Convert float to int
 coins = 0
 
 # Will it take a quater, how many
