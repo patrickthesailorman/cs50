@@ -2,9 +2,14 @@ from nltk.tokenize import sent_tokenize;
 
 def lines(a, b):
     """Return lines in both a and b"""
-
+    list = []
+    linesA = a.splitlines()
+    linesB = b.splitlines()
+    for i in range(linesA):
+        for j in range(linesB):
+            if linesA[i] == linesB[j]
     # TODO
-    return [a.splitlines() + b.splitlines()]
+    return []
 
 
 def sentences(a, b):
