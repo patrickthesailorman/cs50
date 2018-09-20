@@ -4,7 +4,7 @@ def lines(a, b):
     """Return lines in both a and b"""
 
     # TODO
-    return []
+    return [a.splitlines() + b.splitlines()]
 
 
 def sentences(a, b):
