@@ -7,9 +7,10 @@ def lines(a, b):
     linesB = b.splitlines()
     for i in range(linesA):
         for j in range(linesB):
-            if linesA[i] == linesB[j]
+            if linesA[i] == linesB[j]:
+                list.append(linesA[i])
     # TODO
-    return []
+    return list
 
 
 def sentences(a, b):
