@@ -16,13 +16,13 @@ def lines(a, b):
 def sentences(a, b):
     """Return sentences in both a and b"""
     list = []
-    linesA = a.splitlines()
-    linesB = b.splitlines()
+    sentencesA = a.splitlines()
+    sentencesB = b.splitlines()
     for i in range(linesA):
         for j in range(linesB):
-            if linesA[i] == linesB[j]:
-                list.append(linesA[i])
-    # TODO if list includes linesA[i] ignore (no duplicates)
+            if sentencesA[i] == sentencesB[j]:
+                list.append(sentencesA[i])
+    # TODO if list includes sentencesA[i] ignore (no duplicates)
     return []
 
 
